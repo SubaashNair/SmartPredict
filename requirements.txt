@@ -1,0 +1,11 @@
+pytest
+scikit-learn
+numpy
+pandas
+shap
+optuna
+xgboost
+lightgbm
+catboost
+tensorflow
+torch
