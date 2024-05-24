@@ -51,35 +51,35 @@ jobs:
       with:
         packages-dir: dist/
 
-  github-release:
-    name: Create GitHub Release and Upload Distribution
-    needs: publish-to-pypi
-    runs-on: ubuntu-latest
+  # github-release:
+  #   name: Create GitHub Release and Upload Distribution
+  #   needs: publish-to-pypi
+  #   runs-on: ubuntu-latest
 
-    permissions:
-      contents: write  # IMPORTANT: mandatory for making GitHub Releases
-      id-token: write  # IMPORTANT: mandatory for sigstore
+  #   permissions:
+  #     contents: write  # IMPORTANT: mandatory for making GitHub Releases
+  #     id-token: write  # IMPORTANT: mandatory for sigstore
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    - name: Download all the dists
-      uses: actions/download-artifact@v4
-      with:
-        name: python-package-distributions
-        path: dist/
-    - name: Create unique tag
-      id: create_tag
-      run: echo "TAG=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
-    - name: Create GitHub Release
-      env:
-        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-        TAG_NAME: ${{ env.TAG }}
-      run: |
-        gh release create "${{ env.TAG_NAME }}" --repo "${{ github.repository }}" --notes "Automated release"
-    - name: Upload artifact signatures to GitHub Release
-      env:
-        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-        TAG_NAME: ${{ env.TAG }}
-      run: |
-        gh release upload "${{ env.TAG_NAME }}" dist/** --repo "${{ github.repository }}"
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
+  #   - name: Download all the dists
+  #     uses: actions/download-artifact@v4
+  #     with:
+  #       name: python-package-distributions
+  #       path: dist/
+  #   - name: Create unique tag
+  #     id: create_tag
+  #     run: echo "TAG=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+  #   - name: Create GitHub Release
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+  #       TAG_NAME: ${{ env.TAG }}
+  #     run: |
+  #       gh release create "${{ env.TAG_NAME }}" --repo "${{ github.repository }}" --notes "Automated release"
+  #   - name: Upload artifact signatures to GitHub Release
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+  #       TAG_NAME: ${{ env.TAG }}
+  #     run: |
+  #       gh release upload "${{ env.TAG_NAME }}" dist/** --repo "${{ github.repository }}"

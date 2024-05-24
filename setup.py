@@ -69,11 +69,11 @@ if changelog_path.exists():
 
 setup(
     name="smartpredict",
-    version="0.7.3",  # Update the version number
+    version="0.7.4",  # Update the version number
     description="An advanced machine learning library for effortless model training, evaluation, and selection.",
     long_description=long_description,
     long_description_content_type='text/markdown',
-    author="Subashanan Nair",
+    author="Subashanan Nair"
     author_email="subaashnair12@gmail.com",
     url="https://github.com/SubaashNair/SmartPredict",
     packages=find_packages(),

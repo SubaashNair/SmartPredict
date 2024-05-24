@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.7.3] - 2024-05-24
+## [0.7.4] - 2024-05-24
 ### Added
 - KernelExplainer in place of Explainer
 - Added .shape_values in place of .values

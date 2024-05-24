@@ -18,6 +18,6 @@ def explain_model(model, X_test, y_test):
     Returns:
     None
     """
-    explainer = shap.KernelExplainer(model)
+    explainer = shap.KernelExplainer(model.predict,X_test)
     shap_values = explainer.shap_values(X_test)
     shap.summary_plot(shap_values, X_test)
