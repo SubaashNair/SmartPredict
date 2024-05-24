@@ -1,6 +1,11 @@
 # Changelog
 
-## [0.6.13] - 2024-05-24
+## [0.7.3] - 2024-05-24
+### Added
+- KernelExplainer in place of Explainer
+- Added .shape_values in place of .values
+
+## [0.6.13] - 2024-05-23
 ### Added
 - Added comprehensive model assessment metrics to evaluate machine learning models.
   - Accuracy
