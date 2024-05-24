@@ -6,7 +6,7 @@ Provides functions for model explainability using SHAP.
 
 import shap
 
-def explain_model(model, X_test, y_test):
+def explain_model(model, X_test, y_test,sample_size=100):
     """
     Explain the model predictions using SHAP.
 
@@ -18,6 +18,9 @@ def explain_model(model, X_test, y_test):
     Returns:
     None
     """
-    explainer = shap.KernelExplainer(model.predict,X_test)
+    # Summarize the background data
+    background = shap.sample(X_test, sample_size)
+    
+    explainer = shap.KernelExplainer(model.predict,background)
     shap_values = explainer.shap_values(X_test)
     shap.summary_plot(shap_values, X_test)
