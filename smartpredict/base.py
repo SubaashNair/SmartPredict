@@ -3,6 +3,7 @@
 Base module for SmartPredict.
 Defines the BasePredictor class to be inherited by specific predictors.
 """
+import logging
 
 class BasePredictor:
     """
@@ -17,18 +18,20 @@ class BasePredictor:
         self.verbose = verbose
         self.ignore_warnings = ignore_warnings
         self.custom_metric = custom_metric
+        self.logger = logging.getLogger(__name__)
+        logging.basicConfig(level=logging.INFO)
 
-    def fit(self, X_train, X_test, y_train, y_test):
-        """
-        Fit the model using training data.
+    # def fit(self, X_train, X_test, y_train, y_test):
+    #     """
+    #     Fit the model using training data.
 
-        Parameters:
-        X_train (array-like): Training features.
-        X_test (array-like): Testing features.
-        y_train (array-like): Training labels.
-        y_test (array-like): Testing labels.
+    #     Parameters:
+    #     X_train (array-like): Training features.
+    #     X_test (array-like): Testing features.
+    #     y_train (array-like): Training labels.
+    #     y_test (array-like): Testing labels.
 
-        Returns:
-        dict: Model performance results.
-        """
-        raise NotImplementedError("This method needs to be overridden in subclasses")
+    #     Returns:
+    #     dict: Model performance results.
+    #     """
+    #     raise NotImplementedError("This method needs to be overridden in subclasses")
