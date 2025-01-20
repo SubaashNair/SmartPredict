@@ -4,7 +4,9 @@ Feature engineering module for SmartPredict.
 Provides functions for automated feature engineering.
 """
 
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.decomposition import PCA
+# from sklearn.pipeline import Pipeline
 
 def engineer_features(X_train, X_test):
     """
@@ -17,7 +19,16 @@ def engineer_features(X_train, X_test):
     Returns:
     tuple: Transformed training and testing features.
     """
-    scaler = StandardScaler()
-    X_train = scaler.fit_transform(X_train)
-    X_test = scaler.transform(X_test)
-    return X_train, X_test
+    try:
+        poly = PolynomialFeatures(degree=2)
+        X_train_poly = poly.fit_transform(X_train)
+        X_test_poly = poly.transform(X_test)
+
+        pca = PCA(n_components=0.95)
+        X_train_pca = pca.fit_transform(X_train_poly)
+        X_test_poly = pca.transform(X_test_poly)
+
+        return X_train_pca, X_test_poly
+    except Exception as e:
+        logging.error(f"Feature engineering failed: {e}")
+        return X_train,X_test
