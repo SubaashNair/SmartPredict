@@ -4,21 +4,22 @@ Hyperparameter tuning module for SmartPredict.
 Provides functions to perform hyperparameter optimization.
 """
 
-from sklearn.model_selection import GridSearchCV
+import optuna
+from sklearn.model_selection import cross_val_score
 
-def tune_hyperparameters(model, param_grid, X_train, y_train):
-    """
-    Perform hyperparameter tuning using GridSearchCV.
-
-    Parameters:
-    model (estimator): The machine learning model to tune.
-    param_grid (dict): The parameter grid to search over.
-    X_train (array-like): Training features.
-    y_train (array-like): Training labels.
-
-    Returns:
-    estimator: The best model found by GridSearchCV.
-    """
-    grid_search = GridSearchCV(estimator=model, param_grid=param_grid, cv=5, scoring='accuracy')
-    grid_search.fit(X_train, y_train)
-    return grid_search.best_estimator_
+def tune_hyperparameters(model, param_distributions, X_train, y_train):
+    def objective(trial):
+        params = {
+            'n_estimators':trial.suggest_int('n_estimators',10,100),
+            'max_depth':trial.suggest_int('max_depth',1,10),
+        }
+        model.set_params(**params)
+        score = cross_val_score(model,X_train,y_train,cv=5).mean()
+        return score
+    
+    study = optuna.create_study(direction='maximize')
+    study.optimize(objective,n_trials=100)
+    best_params = study.best_params
+    model.set_params(**best_params)
+    model.fit(X_train,y_train)
+    return model
