@@ -15,7 +15,7 @@ if changelog_path.exists():
 
 setup(
     name="smartpredict",
-    version="0.7.8",  # Update the version number
+    version="0.8.0",  # Update the version number
     description="An advanced machine learning library for effortless model training, evaluation, and selection.",
     long_description=long_description,
     long_description_content_type='text/markdown',
