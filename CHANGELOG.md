@@ -2,13 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.0] - 2023-03-29
+## [0.1.0] - 2024-05-24
 
 ### Added
 - Initial release of SmartPredict
-- Unified API for ML Models with SmartClassifier and SmartRegressor
-- Automated Feature Engineering with the FeatureEngineer class
-- Robust Ensemble Methods with voting, averaging, weighted, and stacking approaches
-- Hyperparameter Tuning using Optuna
-- Model Explainability with SHAP-based explanations
-- Comprehensive Error Handling throughout all modules
+- Unified API for ML models
+- Automated feature engineering capabilities
+- Robust ensemble methods
+- Hyperparameter tuning functionality
+- Model explainability tools
+- Comprehensive error handling
+- Test suite with >95% coverage
+- GitHub Actions workflow for automated testing and publishing to PyPI
