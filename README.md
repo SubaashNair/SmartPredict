@@ -15,6 +15,7 @@ SmartPredict is an advanced machine learning library designed to simplify model 
   - [Classification](#classification)
   - [Regression](#regression)
   - [AutoML](#automl)
+- [Available Models](#available-models)
 - [Advanced Features](#advanced-features)
   - [Feature Engineering](#feature-engineering)
   - [Ensemble Methods](#ensemble-methods)
@@ -57,18 +58,25 @@ y = data.target
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-# Create classifier and fit models
-clf = SmartClassifier(
-    models=['RandomForestClassifier', 'LogisticRegression'], 
-    verbose=1
-)
-results = clf.fit(X_train, X_test, y_train, y_test)
+# Create classifier and fit models 
+try:
+    clf = SmartClassifier(
+        models=['Random Forest', 'Logistic Regression'], 
+        verbose=1
+    )
+    results = clf.fit(X_train, X_test, y_train, y_test)
 
-# Display model performance results
-print(results)
+    # Display model performance results
+    print(results)
 
-# Make predictions with all trained models
-predictions = clf.predict(X_test)
+    # Make predictions with the best model
+    predictions = clf.predict(X_test)
+except ValueError as e:
+    print(f"Error: {e}")
+    print("Please check the model names. Available classification models:")
+    print("'Logistic Regression', 'Random Forest', 'Gradient Boosting', 'AdaBoost',")
+    print("'Decision Tree', 'Support Vector Machine', 'K-Nearest Neighbors',")
+    print("'Gaussian Naive Bayes', 'Neural Network', 'XGBoost', 'LightGBM', 'CatBoost'")
 ```
 
 ## Usage
@@ -78,20 +86,28 @@ predictions = clf.predict(X_test)
 ```python
 from smartpredict import SmartClassifier
 
-# Create classifier with custom models and parameters
-clf = SmartClassifier(
-    models=['RandomForestClassifier', 'LogisticRegression', 'SVC'],
-    # Pass custom parameters for each model
-    RandomForestClassifier={'n_estimators': 200, 'max_depth': 10},
-    LogisticRegression={'C': 0.1, 'max_iter': 200},
-    verbose=1
-)
+# Create classifier with correct model names
+try:
+    clf = SmartClassifier(
+        models=['Random Forest', 'Logistic Regression', 'Support Vector Machine'],
+        # Pass custom parameters for each model
+        Random_Forest={'n_estimators': 200, 'max_depth': 10},
+        Logistic_Regression={'C': 0.1, 'max_iter': 200},
+        verbose=1
+    )
 
-# Fit and evaluate all models
-results = clf.fit(X_train, X_test, y_train, y_test)
+    # Fit and evaluate all models
+    results = clf.fit(X_train, X_test, y_train, y_test)
 
-# The best model is automatically selected for predictions
-predictions = clf.predict(new_data)
+    # The best model is automatically selected for predictions
+    predictions = clf.predict(new_data)
+except ValueError as e:
+    print(f"Error: {e}")
+    # List available classification models
+    print("Available classification models:")
+    print("'Logistic Regression', 'Random Forest', 'Gradient Boosting', 'AdaBoost',")
+    print("'Decision Tree', 'Support Vector Machine', 'K-Nearest Neighbors',")
+    print("'Gaussian Naive Bayes', 'Neural Network', 'XGBoost', 'LightGBM', 'CatBoost'")
 ```
 
 ### Regression
@@ -99,19 +115,27 @@ predictions = clf.predict(new_data)
 ```python
 from smartpredict import SmartRegressor
 
-# Create regressor with custom models
-reg = SmartRegressor(
-    models=['RandomForestRegressor', 'LinearRegression', 'SVR'],
-    # Pass custom parameters for a specific model
-    RandomForestRegressor={'n_estimators': 200, 'max_depth': 15},
-    verbose=1
-)
+# Create regressor with correct model names
+try:
+    reg = SmartRegressor(
+        models=['Random Forest', 'Linear Regression', 'Support Vector Machine'],
+        # Pass custom parameters for a specific model
+        Random_Forest={'n_estimators': 200, 'max_depth': 15},
+        verbose=1
+    )
 
-# Fit and evaluate all models
-results = reg.fit(X_train, X_test, y_train, y_test)
+    # Fit and evaluate all models
+    results = reg.fit(X_train, X_test, y_train, y_test)
 
-# The best model is automatically selected for predictions
-predictions = reg.predict(new_data)
+    # The best model is automatically selected for predictions
+    predictions = reg.predict(new_data)
+except ValueError as e:
+    print(f"Error: {e}")
+    # List available regression models
+    print("Available regression models:")
+    print("'Linear Regression', 'Ridge Regression', 'Lasso Regression', 'Random Forest',")
+    print("'Gradient Boosting', 'AdaBoost', 'Decision Tree', 'Support Vector Machine',")
+    print("'K-Nearest Neighbors', 'Neural Network', 'XGBoost', 'LightGBM', 'CatBoost'")
 ```
 
 ### AutoML
@@ -141,6 +165,37 @@ print(f"Accuracy: {result.metrics.get('accuracy', 'N/A'):.4f}")
 new_data = data.drop('target', axis=1).iloc[:3]
 predictions = result.predict(new_data)
 ```
+
+## Available Models
+
+### Classification Models
+- 'Logistic Regression'
+- 'Random Forest'
+- 'Gradient Boosting'
+- 'AdaBoost'
+- 'Decision Tree'
+- 'Support Vector Machine'
+- 'K-Nearest Neighbors'
+- 'Gaussian Naive Bayes'
+- 'Neural Network'
+- 'XGBoost'
+- 'LightGBM'
+- 'CatBoost'
+
+### Regression Models
+- 'Linear Regression'
+- 'Ridge Regression'
+- 'Lasso Regression'
+- 'Random Forest'
+- 'Gradient Boosting'
+- 'AdaBoost'
+- 'Decision Tree'
+- 'Support Vector Machine'
+- 'K-Nearest Neighbors'
+- 'Neural Network'
+- 'XGBoost'
+- 'LightGBM'
+- 'CatBoost'
 
 ## Advanced Features
 
