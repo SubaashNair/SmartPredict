@@ -156,6 +156,39 @@ AutoML performs automatic feature engineering:
 - Creates feature interactions
 - Selects important features
 
+## Available Models
+
+AutoML automatically selects from the following models based on the task type:
+
+### Classification Models
+- 'Logistic Regression'
+- 'Random Forest'
+- 'Gradient Boosting'
+- 'AdaBoost'
+- 'Decision Tree'
+- 'Support Vector Machine'
+- 'K-Nearest Neighbors'
+- 'Gaussian Naive Bayes'
+- 'Neural Network'
+- 'XGBoost'
+- 'LightGBM'
+- 'CatBoost'
+
+### Regression Models
+- 'Linear Regression'
+- 'Ridge Regression'
+- 'Lasso Regression'
+- 'Random Forest'
+- 'Gradient Boosting'
+- 'AdaBoost'
+- 'Decision Tree'
+- 'Support Vector Machine'
+- 'K-Nearest Neighbors'
+- 'Neural Network'
+- 'XGBoost'
+- 'LightGBM'
+- 'CatBoost'
+
 ## AutoMLResult Class
 
 The `fit()` method returns an `AutoMLResult` object with the following properties and methods:
