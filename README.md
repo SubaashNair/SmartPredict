@@ -4,7 +4,7 @@
 [![Build Status](https://github.com/SubaashNair/SmartPredict/actions/workflows/pypi-publish.yml/badge.svg)](https://github.com/SubaashNair/SmartPredict/actions/workflows/pypi-publish.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-SmartPredict is an advanced machine learning library designed to simplify model training, evaluation, and selection. It provides a comprehensive set of tools for classification and regression tasks, including automated hyperparameter tuning, feature engineering, ensemble methods, and model explainability.
+SmartPredict is an advanced machine learning library designed to simplify model training, evaluation, and selection. It provides a comprehensive set of tools for classification and regression tasks, including automated hyperparameter tuning, feature engineering, ensemble methods, model explainability, and fully automated machine learning with AutoML.
 
 ## Table of Contents
 
@@ -14,6 +14,7 @@ SmartPredict is an advanced machine learning library designed to simplify model 
 - [Usage](#usage)
   - [Classification](#classification)
   - [Regression](#regression)
+  - [AutoML](#automl)
 - [Advanced Features](#advanced-features)
   - [Feature Engineering](#feature-engineering)
   - [Ensemble Methods](#ensemble-methods)
@@ -38,6 +39,7 @@ pip install smartpredict
 - **Hyperparameter Tuning**: Uses Optuna for efficient reproducible hyperparameter optimization
 - **Model Explainability**: Provides SHAP-based explanations and feature importance analysis
 - **Comprehensive Error Handling**: Gracefully handles common errors during model training and evaluation
+- **AutoML**: Fully automated machine learning with target detection, feature engineering, and model selection
 
 ## Quick Start
 
@@ -110,6 +112,34 @@ results = reg.fit(X_train, X_test, y_train, y_test)
 
 # The best model is automatically selected for predictions
 predictions = reg.predict(new_data)
+```
+
+### AutoML
+
+```python
+from smartpredict import AutoML
+import pandas as pd
+from sklearn.datasets import load_iris
+
+# Load dataset
+iris = load_iris()
+data = pd.DataFrame(
+    data=iris.data,
+    columns=iris.feature_names
+)
+data['target'] = iris.target
+
+# Use AutoML - no need to manually specify models or split data
+auto_ml = AutoML(verbose=1)
+result = auto_ml.fit(data)
+
+# Check results
+print(f"Best model: {result.best_model_name}")
+print(f"Accuracy: {result.metrics.get('accuracy', 'N/A'):.4f}")
+
+# Make predictions with the best model
+new_data = data.drop('target', axis=1).iloc[:3]
+predictions = result.predict(new_data)
 ```
 
 ## Advanced Features
